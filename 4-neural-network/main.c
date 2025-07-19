@@ -44,10 +44,10 @@ void simple_cnn(Tensor* output, Tensor* input) {
     // ===== Layer 5: Flatten and Fully Connected (4x4x8=128 -> 10) =====
     Tensor* fc_weights = create_tensor(10, 128, 1, true);
     Tensor* fc_bias = create_tensor(10, 1, 1, true);
-    Tensor* fc_output = create_tensor(10, 1, 1, false);
     Tensor* flatten_input = create_tensor(128, 1, 1, false);
     flatten(flatten_input, pool2_output);
-    linear(fc_output, flatten_input, fc_weights, fc_bias);
+    linear(output, flatten_input, fc_weights, fc_bias);
+
     free_tensor(&pool2_output);
     free_tensor(&flatten_input);
     free_tensor(&fc_weights);
