@@ -14,17 +14,17 @@ OBJ := $(BUILD_DIR)/$(SRC:.c=.o)
 all: run
 
 $(BUILD_DIR)/$(BIN): $(OBJ)
-	-@$(CC) $^ -o $@
+	$(CC) $^ -o $@
 
 $(BUILD_DIR)/%.o: %.c
-	-@mkdir -p $(BUILD_DIR)
-	-@$(CC) -c $(CFLAGS) $< -I$(INCLUDE_DIR) -o $@
+	@mkdir -p $(BUILD_DIR)
+	$(CC) -c $(CFLAGS) $< -I$(INCLUDE_DIR) -o $@
 
 run: $(BUILD_DIR)/$(BIN)
-	-@./$(BUILD_DIR)/$(BIN)
+	./$(BUILD_DIR)/$(BIN)
 
 clean:
-	rm -rf $(BUILD_DIR)
+	@rm -rf $(BUILD_DIR)
 
 help:
 	@echo "Available targets:"

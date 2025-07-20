@@ -28,7 +28,7 @@ log: $(BUILD_DIR)/log
 sqrt:  $(BUILD_DIR)/sqrt
 
 clean:
-	rm -rf $(BUILD_DIR)
+	@rm -rf $(BUILD_DIR)
 
 help:
 	@echo ""

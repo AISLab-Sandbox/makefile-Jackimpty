@@ -30,4 +30,4 @@ $(BUILD_DIR)/$(BIN): $(OBJ)
 	$(CC) $^ -L$(LINK_DIR) -o $@
 
 clean:
-	rm -rf $(BUILD_DIR)
+	@rm -rf $(BUILD_DIR)
