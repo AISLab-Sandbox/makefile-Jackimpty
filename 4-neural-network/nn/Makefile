@@ -10,13 +10,11 @@ OBJ := $(SRC:src/nn/%.c=$(BUILD_DIR)/%.o)
 all: static dynamic
 
 static: $(BUILD_DIR)/libnn.a
-#	$(CC) $(MAIN) -L. -lmath -o main_static
 
 $(BUILD_DIR)/libnn.a: $(OBJ)
 	ar rcs $@ $^
 
 dynamic: $(BUILD_DIR)/libnn.so
-#	$(CC) $(MAIN) -L. -lmath -o main_shared
 
 $(BUILD_DIR)/libnn.so: $(OBJ)
 	$(CC) -shared -o $@ $^
@@ -26,4 +24,4 @@ $(BUILD_DIR)/%.o: src/nn/%.c include/nn/%.h
 	$(CC) -fPIC -c $< -I$(INCLUDE_DIR) -o $@
 
 clean:
-	rm -rf lib 
+	@rm -rf lib
