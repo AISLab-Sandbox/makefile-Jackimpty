@@ -21,7 +21,6 @@ debug:CFLAGS := $(DEBUG_FLAGS)
 debug: ./$(BUILD_DIR)/$(BIN)
 	./$(BUILD_DIR)/$(BIN)
 
-
 $(BUILD_DIR)/%.o: %.c
 	@mkdir -p $(BUILD_DIR)
 	$(CC) -c $(CFLAGS) $< -I$(INCLUDE_DIR) -o $@

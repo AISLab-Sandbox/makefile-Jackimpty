@@ -2,18 +2,25 @@ BIN := main
 
 CC := gcc
 
-# CFLAGS := -Wall -Wextra -O2
+RELEASE_FLAGS := -O2
+DEBUG_FLAGS := -Wall -Wextra -g
 INCLUDE_DIR := $(PWD)/nn/include/
 BUILD_DIR := build
 
 SRC := main.c
 OBJ := $(BUILD_DIR)/$(SRC:.c=.o)
 
-.PHONY: all clean static dynamic
+.PHONY: all clean static dynamic debug run help
 
+all: CFLAGS:=$(RELEASE_FLAGS)
+all: dynamic
 
-all:
-	$(MAKE) -C nn
+debug: CFLAGS:=$(DEBUG_FLAGS)
+debug: 
+	$(MAKE) -C nn CFLAGS="$(CFLAGS)"
+
+run: dynamic $(BUILD_DIR)/$(BIN)
+	$(BUILD_DIR)/$(BIN)
 
 $(BUILD_DIR)/%.o: %.c
 	@mkdir -p $(BUILD_DIR)
@@ -27,13 +34,22 @@ static: $(OBJ) ./nn/lib/libnn.a
 
 dynamic: $(OBJ) ./nn/lib/libnn.so
 	$(CC) $< -L$(PWD)/nn/lib -lm -lnn -Wl,-rpath,$(PWD)/nn/lib -o $(BUILD_DIR)/$(BIN)
-#	$(CC) $< ./nn/lib/libnn.so -Wl,-rpath,$(PWD)/nn/lib -o $(BUILD_DIR)/$(BIN)
-#	$(CC) $< ./nn/lib/libnn.so -o $(BUILD_DIR)/$(BIN)
-#	export LD_LIBRARY_PATH=$(PWD)/nn/lib
 
 ./nn/lib/libnn.so:
-	$(MAKE) -C nn dynamic
+	$(MAKE) -C nn CFLAGS=$(CFLAGS) dynamic
 
 clean:
 	@$(MAKE) -C nn clean
 	@rm -rf $(BUILD_DIR)
+
+help:
+	@echo "Usage: make <target>"
+	@echo ""
+	@echo "Targets:"
+	@echo "  all         Build the project using release flags (-O2) and dynamic library"
+	@echo "  debug       Build the project using debug flags (-Wall -Wextra -g)"
+	@echo "  run         Run the dynamically linked executable after building it"
+	@echo "  static      Build the project using the static library"
+	@echo "  dynamic     Build the project using the dynamic library"
+	@echo "  clean       Clean all build artifacts from both top-level and nn/"
+	@echo "  help        Show all targets"
