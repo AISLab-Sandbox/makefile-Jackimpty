@@ -17,7 +17,7 @@ $(BUILD_DIR)/libnn.a: $(OBJ)
 dynamic: $(BUILD_DIR)/libnn.so
 
 $(BUILD_DIR)/libnn.so: $(OBJ)
-	$(CC) -shared -o $@ $^
+	$(CC) -shared -o $@ $^  -lm
 
 $(BUILD_DIR)/%.o: src/nn/%.c include/nn/%.h
 	@mkdir -p $(BUILD_DIR)
