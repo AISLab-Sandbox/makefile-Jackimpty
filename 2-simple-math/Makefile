@@ -19,13 +19,16 @@ $(BUILD_DIR)/%.o: %.c
 	$(CC) -c $< -o $@
 
 $(BUILD_DIR)/%: $(BUILD_DIR)/%.o
-	$(CC) $^ -o $@
+	$(CC) $^ -o $@ -lm
 
 area: $(BUILD_DIR)/area
+	@$(BUILD_DIR)/area
 
 log: $(BUILD_DIR)/log
+	@$(BUILD_DIR)/log
 
 sqrt:  $(BUILD_DIR)/sqrt
+	@$(BUILD_DIR)/sqrt
 
 clean:
 	@rm -rf $(BUILD_DIR)
