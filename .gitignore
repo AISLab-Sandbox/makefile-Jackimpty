@@ -57,3 +57,4 @@ dkms.conf
 build/
 lib/
 .DS_Store
+lab3/dist/
