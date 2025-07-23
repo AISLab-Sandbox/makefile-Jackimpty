@@ -1,0 +1,16 @@
+[targets.homework]
+help = "build homework release, with tagged sections removed"
+copy_files = [
+    { src = "art/", dst = "dist/aoc2025-lab3/StudentID_lab3/art/", ignore = [".gitkeep",] },
+    { src = "src/", dst = "dist/aoc2025-lab3/StudentID_lab3/src/", ignore = [".gitkeep",] },
+    { src = "include/", dst = "dist/aoc2025-lab3/StudentID_lab3/include/", ignore = [".gitkeep",] },
+    { src = "testbench/", dst = "dist/aoc2025-lab3/StudentID_lab3/testbench/", ignore = [".gitkeep",] },
+    { src = ".clang-format", dst = "dist/aoc2025-lab3/StudentID_lab3/.clang-format"},
+    { src = "report.md", dst = "dist/aoc2025-lab3/StudentID_lab3/report.md" },
+]
+sections = [
+    { start = "//! hint>>", end = "//! hint<<", action = "replace", with = "/*! <<<========= Implement here =========>>>*/" },
+    { start = "//! remove>>", end = "//! remove<<", action = "remove" },
+]
+prologue = "./script/prologue.sh"
+epilogue = "zip -r ./dist/aoc2025-lab3.zip ./dist/aoc2025-lab3"
