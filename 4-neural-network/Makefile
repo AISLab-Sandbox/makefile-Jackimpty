@@ -6,6 +6,9 @@ RELEASE_FLAGS := -O2
 DEBUG_FLAGS := -Wall -Wextra -g
 INCLUDE_DIR := $(PWD)/nn/include/
 BUILD_DIR := build
+CPPFLAGS := -I $(PWD)/nn/include/
+LDFLAGS := -L $(PWD)/nn/lib
+LDLIBS := -lnn
 
 SRC := main.c
 OBJ := $(BUILD_DIR)/$(SRC:.c=.o)

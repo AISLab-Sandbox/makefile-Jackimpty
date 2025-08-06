@@ -1,8 +1,7 @@
 BIN := main
 
 CC := gcc
-RELEASE_FLAGS := -O2
-DEBUG_FLAGS := -Wall -Wextra -g
+CFLAGS := -Wall -Wextra
 
 INCLUDE_DIR := ./
 LINK_DIR := ./
@@ -13,11 +12,11 @@ OBJ := $(SRC:%.c=$(BUILD_DIR)/%.o)
 
 .PHONY: all clean debug
 
-all: CFLAGS := $(RELEASE_FLAGS)
+all: CFLAGS += -O2
 all: ./$(BUILD_DIR)/$(BIN)
 	./$(BUILD_DIR)/$(BIN)
 
-debug:CFLAGS := $(DEBUG_FLAGS)
+debug:CFLAGS += -g -O0
 debug: ./$(BUILD_DIR)/$(BIN)
 	./$(BUILD_DIR)/$(BIN)
 
