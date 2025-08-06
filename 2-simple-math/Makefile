@@ -1,13 +1,11 @@
-SRC = $(wildcard *.c)
-
 CC := gcc
 CFLAGS := -Wall -Wextra -O2
 
 BUILD_DIR := build
 
+SRC := $(wildcard *.c)
 BIN := $(SRC:.c=)
-OBJ := $(BIN:%=$(BUILD_DIR)/%.o)
-EXE := $(BIN:%=$(BUILD_DIR)/%)
+EXE := $(SRC:%.c=$(BUILD_DIR)/%)
 
 .PRECIOUS: $(BUILD_DIR)/%.o
 .PHONY: all clean area log sqrt
